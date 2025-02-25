@@ -19,6 +19,6 @@
 > Windows terminal --> settings --> Profile Default --> Appearance --> Font Face --> Cascadia Code NF
 > VSCode settings --> terminal.integrated.fontfamily --> 'Cascadia Code NF', Consolas, 'Courier New', monospace
 
-#Set windows explorer
+# Set windows explorer
 show extensions
 show hidden files
