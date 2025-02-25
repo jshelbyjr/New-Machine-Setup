@@ -33,6 +33,7 @@ $wPSDir = $PSProfileRoot + '\WindowsPowerShell'
 $wPS = $wPSDir + '\Microsoft.PowerShell_profile.ps1'
 $ps7Dir = $PSProfileRoot + '\PowerShell'
 $ps7 = $ps7Dir + '\Microsoft.PowerShell_profile.ps1'
+$vscode = $ps7Dir + '\Microsoft.VSCode_profile.ps1'
 
 $wsprofile = Test-Path $wPS
 $ps7profile = Test-Path $ps7
@@ -57,6 +58,7 @@ if (-not $wsprofile) {
 if (-not $ps7profile) {
     Write-Host "Creating PS7 profile file"
     New-Item -ItemType File -Path $ps7 -Force
+    New-Item -ItemType File -Path $vscode -Force
 } 
 
 # Setup oh-my-posh themes for PS7 and Win PowerShell
@@ -68,7 +70,11 @@ $ps7content ='oh-my-posh --init --shell pwsh --config "$env:Posh-Themes_path\ato
 $wpscontent ='oh-my-posh --init --shell powershell --config "$env:Posh-Themes_path\atomic.imp.json" | Invoke-Expression'
 
 Set-Content -path $ps7 -value $ps7content
+Set-Content -path $vscode -value $ps7content
+Add-Content -path $ps7 -value "Import-Module Terminal-Icons"
+Add-Content -path $vscode -value "Import-Module Terminal-Icons"
 Set-Content -path $WPS -value $wpscontent
+Add-Content -path $WPS -value "Import-Module Terminal-Icons"
 
 Write-Host "Don't forget to update Terminal default profile font and VSCode default font to use Caccadai NF" -background yellow -foreground red
 
