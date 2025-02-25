@@ -21,4 +21,5 @@
 
 # Set windows explorer
 show extensions
+
 show hidden files
