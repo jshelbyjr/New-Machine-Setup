@@ -4,9 +4,6 @@ winget install --id=Microsoft.VisualStudioCode  -e
 winget install --id=JanDeDobbeleer.OhMyPosh  -e
 winget install --id=Microsoft.Git  -e
 
-#install NERD font, used for custom prompts
-winget install --id=DEVCOM.JetBrainsMonoNerdFont -e
-
 #language support
 winget install Microsoft.Powershell --installer-type WIX --source winget #required due to update install method installing portable zip files
 winget install --id=Python.Python.3.13 -e
@@ -20,8 +17,8 @@ winget install --id=Google.Chrome  -e
 #update all
 winget update --all
 
-#Install WSL with default Ubuntu distrobution
-wsl --install
+#Ensure we are now using PowerShell 7
+pwsh.exe
 
 # Set explorer to show hidden items and extensions
 $key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
@@ -44,13 +41,9 @@ $ps7profile = Test-Path $ps7
 # Create folders if they don't exist
 if (-not (Test-Path $wPSDir)) {
     Write-Host "Creating Windows PowerShell profile directory"
-  try{    
     New-Item -ItemType Directory -Path $wPSDir -Force -Verbose
-  }catch{
     Write-Host "could not create folder"
-  }
 }
-
 if (-not (Test-Path $ps7Dir)) {
     Write-Host "Creating PS7 profile directory"
     New-Item -ItemType Directory -Path $ps7Dir -Force
@@ -65,3 +58,34 @@ if (-not $ps7profile) {
     Write-Host "Creating PS7 profile file"
     New-Item -ItemType File -Path $ps7 -Force
 } 
+
+# Setup oh-my-posh themes for PS7 and Win PowerShell
+#install NERD Font
+oh-my-posh font install CascadiaCode
+
+#set theme in profiles
+$ps7content ='oh-my-posh --init --shell pwsh --config "$env:Posh-Themes_path\atomic.imp.json" | Invoke-Expression'
+$wpscontent ='oh-my-posh --init --shell powershell --config "$env:Posh-Themes_path\atomic.imp.json" | Invoke-Expression'
+
+Set-Content -path $ps7 -value $ps7content
+Set-Content -path $WPS -value $wpscontent
+
+Write-Host "Don't forget to update Terminal default profile font and VSCode default font to use Caccadai NF" -background yellow -foreground red
+
+#Install modules
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Install-Module -Name Terminal-Icons -Repository PSGallery
+Install-Module PNP.PowerShell -Scope CurrentUser -force
+Install-Module Microsoft.Graph -Scope CurrentUser -force
+
+##Install WSL with default Ubuntu distribution 
+wsl --install
+
+# add oh-my-posh for WSL and update
+#<TODO - update to bash/ubuntu terminal for WSL>
+
+#install Sandbox
+Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
+
+#Restart for all changes
+Restart-Computer
