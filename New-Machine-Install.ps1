@@ -66,8 +66,8 @@ if (-not $ps7profile) {
 oh-my-posh font install CascadiaCode
 
 #set theme in profiles
-$ps7content ='oh-my-posh --init --shell pwsh --config "$env:Posh-Themes_path\atomic.imp.json" | Invoke-Expression'
-$wpscontent ='oh-my-posh --init --shell powershell --config "$env:Posh-Themes_path\atomic.imp.json" | Invoke-Expression'
+$ps7content ='oh-my-posh --init --shell pwsh --config "$env:Posh-Themes_path\atomic.omp.json" | Invoke-Expression'
+$wpscontent ='oh-my-posh --init --shell powershell --config "$env:Posh-Themes_path\atomic.omp.json" | Invoke-Expression'
 
 Set-Content -path $ps7 -value $ps7content
 Set-Content -path $vscode -value $ps7content
