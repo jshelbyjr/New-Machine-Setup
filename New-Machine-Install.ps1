@@ -87,11 +87,27 @@ Install-Module Microsoft.Graph -Scope CurrentUser -force
 ##Install WSL with default Ubuntu distribution 
 wsl --install
 
-# add oh-my-posh for WSL and update
-#<TODO - update to bash/ubuntu terminal for WSL>
-
 #install Sandbox
 Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
+
+#update WSL
+# 1st time is interactive you have to set username/password
+# when updating SUDO you have to again enter password
+
+wsl.exe
+bash
+sudo apt update
+sudo apt upgrade
+
+sudo apt install unzip
+curl -s https://ohmyposh.dev/install.sh | bash -s
+exit
+bash
+oh-my-posh font install cascadiacode
+
+cd
+echo 'eval "$(${HOME}/.local/bin/oh-my-posh init bash --config ${HOME}/.cache/oh-my-posh/themes/atomic.omp.json)"' >> ~/.bashrc
+eval "$(oh-my-posh init bash --config ~/.cache/oh-my-posh/themes/atomic.omp.json)"
 
 #Restart for all changes
 Restart-Computer
