@@ -1,5 +1,6 @@
 #Terminal and code editor
 winget install --id=Microsoft.WindowsTerminal  -e
+winget install 'Microsoft Whiteboard' -e
 winget install --id=Microsoft.VisualStudioCode  -e
 winget install --id=JanDeDobbeleer.OhMyPosh  -e
 winget install --id=Microsoft.Git  -e
