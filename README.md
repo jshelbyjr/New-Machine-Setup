@@ -4,6 +4,7 @@
 - VSCode
 - Oh-My-Posh
 - Git
+- Whiteboard
 
 # Enables windows features
 - Sandbox
