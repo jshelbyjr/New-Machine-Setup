@@ -4,6 +4,7 @@ winget install 'Microsoft Whiteboard' -e
 winget install --id=Microsoft.VisualStudioCode  -e
 winget install --id=JanDeDobbeleer.OhMyPosh  -e
 winget install --id=Microsoft.Git  -e
+winget install --id=Microsoft.PowerToys -e
 
 #language support
 winget install Microsoft.Powershell --installer-type WIX --source winget #required due to update install method installing portable zip files
