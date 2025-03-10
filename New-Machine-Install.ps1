@@ -85,6 +85,10 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Install-Module -Name Terminal-Icons -Repository PSGallery
 Install-Module PNP.PowerShell -Scope CurrentUser -force
 Install-Module Microsoft.Graph -Scope CurrentUser -force
+Install-Module ExchangeOnlineManagement -Force
+Install-Module Microsoft.Online.SharePoint.PowerShell -Force
+Install-Module MicrosoftTeams -Force
+
 
 ##Install WSL with default Ubuntu distribution 
 wsl --install
